@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Switchboard — a real phone line for kids, no screen</title>
+<meta name="description" content="Switchboard lets kids call their friends on a real phone — no screen, no apps, no internet, no strangers. Bring any phone; we connect it.">
+<style>
+  :root{
+    --paper:#f7f2e8;
+    --ink:#20242e;
+    --ink-soft:#4a4f5c;
+    --accent:#c8452f;      /* classic telephone red */
+    --accent-deep:#a5341f;
+    --line:#e2d8c4;
+    --card:#fffdf8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.wordmark{font-family:Georgia,"Times New Roman",serif;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+
+  /* header */
+  header{padding:28px 0;border-bottom:1px solid var(--line);}
+  .headrow{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .wordmark{font-size:1.5rem;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:10px;}
+  .wordmark svg{width:26px;height:26px;flex:none;}
+  .nav-cta{font-size:.95rem;color:var(--accent-deep);text-decoration:none;font-weight:600;border:1.5px solid var(--accent);padding:8px 16px;border-radius:999px;}
+  .nav-cta:hover{background:var(--accent);color:#fff;}
+
+  /* hero */
+  .hero{padding:72px 0 56px;text-align:center;}
+  .kicker{display:inline-block;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep);font-weight:700;margin-bottom:20px;}
+  .hero h1{font-size:clamp(2.1rem,5vw,3.4rem);line-height:1.1;margin-bottom:20px;}
+  .hero p.lead{font-size:clamp(1.05rem,2.2vw,1.3rem);color:var(--ink-soft);max-width:620px;margin:0 auto 32px;}
+  .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;font-size:1.05rem;padding:15px 34px;border-radius:999px;border:none;cursor:pointer;transition:background .15s;}
+  .btn:hover{background:var(--accent-deep);}
+  .hero-note{margin-top:14px;font-size:.9rem;color:var(--ink-soft);}
+
+  .phone-art{margin:44px auto 0;width:170px;height:170px;}
+
+  /* problem */
+  .band{padding:60px 0;border-top:1px solid var(--line);}
+  .band.tint{background:var(--card);}
+  .band h2{font-size:clamp(1.6rem,3.5vw,2.2rem);text-align:center;margin-bottom:14px;}
+  .band .sub{text-align:center;color:var(--ink-soft);max-width:640px;margin:0 auto 40px;font-size:1.08rem;}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 22px;text-align:center;}
+  .step .num{font-family:Georgia,serif;font-size:1.5rem;color:var(--accent);font-weight:700;width:46px;height:46px;line-height:44px;border:2px solid var(--accent);border-radius:50%;margin:0 auto 16px;}
+  .step h3{font-size:1.15rem;margin-bottom:8px;}
+  .step p{color:var(--ink-soft);font-size:.98rem;}
+
+  /* features */
+  .features{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:8px;}
+  .feat{display:flex;gap:14px;align-items:flex-start;}
+  .feat .dot{flex:none;width:12px;height:12px;border-radius:50%;background:var(--accent);margin-top:8px;}
+  .feat h3{font-size:1.12rem;margin-bottom:4px;}
+  .feat p{color:var(--ink-soft);font-size:.98rem;}
+
+  /* waitlist */
+  #waitlist{padding:72px 0;text-align:center;}
+  #waitlist h2{font-size:clamp(1.7rem,3.5vw,2.4rem);margin-bottom:12px;}
+  #waitlist p.sub{color:var(--ink-soft);max-width:560px;margin:0 auto 32px;font-size:1.08rem;}
+  form.signup{max-width:480px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+  form.signup input{font-size:1rem;padding:14px 16px;border:1.5px solid var(--line);border-radius:10px;background:#fff;font-family:inherit;}
+  form.signup input:focus{outline:none;border-color:var(--accent);}
+  form.signup .row{display:flex;gap:12px;}
+  form.signup .row input{flex:1;}
+  .founder-note{margin-top:18px;font-size:.92rem;color:var(--ink-soft);}
+  .founder-note strong{color:var(--ink);}
+  .form-status{display:none;margin-top:18px;font-size:1.05rem;color:var(--accent-deep);font-weight:600;}
+
+  footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--ink-soft);font-size:.9rem;}
+  footer .fw{font-family:Georgia,serif;color:var(--ink);font-weight:700;font-size:1rem;}
+
+  @media(max-width:720px){
+    .steps{grid-template-columns:1fr;}
+    .features{grid-template-columns:1fr;}
+    .hero{padding:52px 0 40px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap headrow">
+    <div class="wordmark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c8452f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Switchboard
+    </div>
+    <a class="nav-cta" href="#waitlist">Join the waitlist</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="kicker">The kids' phone line</span>
+    <h1>A real phone for your kid.<br>No screen. No strangers.</h1>
+    <p class="lead">Switchboard lets kids call their friends on an actual telephone — pick one out together, plug it into our little box, and they can dial their friends in three digits. No apps, no internet, no scrolling. Just a phone that rings.</p>
+    <a class="btn" href="#waitlist">Join the waitlist</a>
+    <div class="hero-note">Free to join · Founding families get early access</div>
+
+    <svg class="phone-art" viewBox="0 0 120 120" fill="none" stroke="#20242e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="18" y="46" width="84" height="52" rx="10" fill="#fffdf8"/>
+      <path d="M30 46 C30 30 44 22 60 22 C76 22 90 30 90 46" fill="none"/>
+      <circle cx="60" cy="66" r="17" fill="none" stroke="#c8452f"/>
+      <circle cx="60" cy="66" r="3" fill="#c8452f" stroke="none"/>
+      <circle cx="60" cy="53" r="2" fill="#20242e" stroke="none"/>
+      <circle cx="71" cy="58" r="2" fill="#20242e" stroke="none"/>
+      <circle cx="71" cy="74" r="2" fill="#20242e" stroke="none"/>
+      <circle cx="60" cy="79" r="2" fill="#20242e" stroke="none"/>
+      <circle cx="49" cy="74" r="2" fill="#20242e" stroke="none"/>
+      <circle cx="49" cy="58" r="2" fill="#20242e" stroke="none"/>
+      <line x1="34" y1="98" x2="34" y2="106"/><line x1="86" y1="98" x2="86" y2="106"/>
+    </svg>
+  </div>
+</section>
+
+<section class="band tint">
+  <div class="wrap">
+    <h2>Kids don't need a smartphone to call a friend</h2>
+    <p class="sub">They need a phone. Switchboard gives them the good part of growing up with a phone — calling your friends, being trusted with your own line — and none of the part that keeps parents up at night.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Bring a phone</h3>
+        <p>Thrift a cool vintage phone with your kid, or use any cheap corded one. It's their phone — they pick it.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Plug in the box</h3>
+        <p>Our little connector joins your home WiFi and quietly links the phone to the Switchboard network. Setup takes minutes.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Dial a friend</h3>
+        <p>Three digits and it rings — real dial tone and all. Only the friends you approve. Nobody else can get through.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>Made for the way parents actually worry</h2>
+    <p class="sub">Every choice here is about giving kids independence without giving them the internet.</p>
+    <div class="features">
+      <div class="feat"><span class="dot"></span><div><h3>No screen, ever</h3><p>It's a telephone. There's nothing to scroll, no browser, no apps, no games, no social media.</p></div></div>
+      <div class="feat"><span class="dot"></span><div><h3>A closed circle</h3><p>Your kid can only reach friends you've approved — a shared line among your community, not the open phone network. No robocalls, no strangers.</p></div></div>
+      <div class="feat"><span class="dot"></span><div><h3>You're the operator</h3><p>Parents manage the approved list and set quiet hours, so late-night chatting isn't a thing.</p></div></div>
+      <div class="feat"><span class="dot"></span><div><h3>Real, and a little magic</h3><p>Genuine dial tones, a busy signal, even an operator to help the littlest kids connect. It feels like a real phone because it is one.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="waitlist">
+  <div class="wrap">
+    <h2>Be first on your kid's Switchboard</h2>
+    <p class="sub">We're rolling out to schools and neighborhoods a community at a time. Add your email and we'll tell you when a line opens near you.</p>
+
+    <form class="signup" id="waitform" action="https://formspree.io/f/mrenzeyy" method="POST">
+      <input type="email" name="email" placeholder="Your email address" required>
+      <div class="row">
+        <input type="text" name="name" placeholder="Your name (optional)">
+        <input type="text" name="community" placeholder="School or neighborhood (optional)">
+      </div>
+      <!-- Honeypot: hidden from real visitors (off-screen, not display:none so
+           basic bots that skip hidden fields still fill it), ignored by
+           Formspree, checked by the portal's /api/waitlist. -->
+      <input type="text" name="website" tabindex="-1" autocomplete="off"
+             style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+      <button class="btn" type="submit">Join the waitlist</button>
+    </form>
+    <p class="form-status" id="formstatus">Thanks — you're on the list. We'll be in touch when a line opens near you.</p>
+
+    <p class="founder-note"><strong>PS 11 families:</strong> you're our founding circle — early access and a free first year. Mention PS 11 above.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fw">Switchboard</div>
+    <p>The kids' phone line · switchboard.kids</p>
+    <p style="margin-top:6px;font-size:.85rem;color:var(--ink-soft);">Switchboard is a product of Universal Design and Manufacturing LLC.</p>
+  </div>
+</footer>
+
+<script>
+  // Waitlist capture. First choice is the Switchboard parent portal's own
+  // endpoint, so signups land directly in the shared data model (the waitlist
+  // table). Until the portal is deployed at this URL, the post fails and we
+  // fall back to Formspree (form.action), so signups always land somewhere.
+  // Set to '' to skip the portal entirely and use Formspree only.
+  var PORTAL_WAITLIST_URL = 'https://portal.switchboard.kids/api/waitlist';
+
+  var form = document.getElementById('waitform');
+  function confirmSignup(){
+    form.style.display='none';
+    document.getElementById('formstatus').style.display='block';
+  }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = new FormData(form);
+    function toFormspree(){
+      fetch(form.action, {method:'POST', body:data, headers:{'Accept':'application/json'}})
+        .then(function(r){ r.ok ? confirmSignup() : form.submit(); })
+        .catch(function(){ form.submit(); });
+    }
+    if(PORTAL_WAITLIST_URL){
+      fetch(PORTAL_WAITLIST_URL, {method:'POST', body:data, headers:{'Accept':'application/json'}})
+        .then(function(r){ r.ok ? confirmSignup() : toFormspree(); })
+        .catch(toFormspree); // portal not reachable yet → Formspree
+    } else {
+      toFormspree();
+    }
+  });
+</script>
+
+</body>
+</html>
