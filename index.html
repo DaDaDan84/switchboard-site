@@ -69,6 +69,18 @@
   .feat .dot{flex:none;width:12px;height:12px;border-radius:50%;background:var(--accent);margin-top:8px;}
   .feat h3{font-size:1.12rem;margin-bottom:4px;}
   .feat p{color:var(--ink-soft);font-size:.98rem;}
+  .features .feat:last-child:nth-child(odd){grid-column:1/-1;max-width:460px;margin:0 auto;}
+
+  /* compare */
+  .compare{max-width:760px;margin:0 auto;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);}
+  .compare-head,.compare-row{display:grid;grid-template-columns:130px 1fr 1fr;}
+  .compare-col-h{padding:14px 16px;font-weight:700;text-align:center;color:var(--accent-deep);}
+  .compare-col-h.alt{color:var(--ink-soft);}
+  .compare-row{border-top:1px solid var(--line);}
+  .compare-label{padding:16px 12px;font-size:.82rem;font-weight:700;color:var(--ink-soft);display:flex;align-items:center;}
+  .compare-cell{padding:16px 18px;font-size:.92rem;color:var(--ink);border-left:1px solid var(--line);}
+  .compare-cell.alt{color:var(--ink-soft);}
+  .compare-footnote{text-align:center;font-size:.8rem;color:var(--ink-soft);margin-top:16px;}
 
   /* pricing */
   .pricing-card{background:var(--card);border:2px solid var(--accent);border-radius:16px;
@@ -101,7 +113,11 @@
   @media(max-width:720px){
     .steps{grid-template-columns:1fr;}
     .features{grid-template-columns:1fr;}
+    .features .feat:last-child:nth-child(odd){max-width:none;}
     .hero{padding:52px 0 40px;}
+    .compare-head,.compare-row{grid-template-columns:1fr;}
+    .compare-label{padding-bottom:0;}
+    .compare-cell{border-left:none;border-top:1px solid var(--line);}
   }
 </style>
 </head>
@@ -115,7 +131,7 @@
     </div>
     <div class="nav-links">
       <a class="nav-cta" href="#waitlist">Join the waitlist</a>
-      <a class="nav-buy" href="https://portal.switchboard.kids/order/new">Buy a Jack — $119</a>
+      <a class="nav-buy" href="https://portal.switchboard.kids/signup">Buy a Jack — $119</a>
     </div>
   </div>
 </header>
@@ -173,17 +189,53 @@
     <h2>Made for the way parents actually worry</h2>
     <p class="sub">Every choice here is about giving kids independence without giving them the internet.</p>
     <div class="features">
-      <div class="feat"><span class="dot"></span><div><h3>No screen, ever</h3><p>It's a telephone. There's nothing to scroll, no browser, no apps, no games, no social media.</p></div></div>
+      <div class="feat"><span class="dot"></span><div><h3>No scrolling, ever</h3><p>It's a telephone. There's nothing to scroll, no browser, no apps, no games, no social media.</p></div></div>
       <div class="feat"><span class="dot"></span><div><h3>A closed circle</h3><p>Your kid can only reach friends you've approved — a shared line among your community, not the open phone network. No robocalls, no strangers.</p></div></div>
       <div class="feat"><span class="dot"></span><div><h3>You're the operator</h3><p>Parents manage the approved list and set quiet hours, so late-night chatting isn't a thing.</p></div></div>
-      <div class="feat"><span class="dot"></span><div><h3>Real, and a little magic</h3><p>Genuine dial tones, a busy signal, even an operator to help the littlest kids connect. It feels like a real phone because it is one.</p></div></div>
+      <div class="feat"><span class="dot"></span><div><h3>Real, and a little magic</h3><p>Genuine dial tones, a busy signal. It feels like a real phone because it is one.</p></div></div>
+      <div class="feat"><span class="dot"></span><div><h3>Numbers little ones can remember</h3><p>Three digits, not ten. It's a private numbering plan for your own community — a school, a street, a friend group — and you decide who's 101 and who's 102.</p></div></div>
     </div>
   </div>
 </section>
 
-<section id="pricing" class="band tint">
+<section class="band tint">
   <div class="wrap">
-    <h2>Simple, one-time pricing</h2>
+    <h2>How Switchboard compares to Tin Can</h2>
+    <p class="sub">Tin Can popularized the screen-free phone for kids. Here's what's different about Switchboard.</p>
+    <div class="compare">
+      <div class="compare-head">
+        <div></div>
+        <div class="compare-col-h">Switchboard</div>
+        <div class="compare-col-h alt">Tin Can</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">Reaching friends</div>
+        <div class="compare-cell">A numbering plan you control — assign short, memorable extensions (101, 102, 103…) for your own closed community.</div>
+        <div class="compare-cell alt">Contacts are managed in a companion app. Reaching anyone beyond another Tin Can needs their regular phone number and the paid Party Line plan ($9.99/mo).</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">The phone itself</div>
+        <div class="compare-cell">A genuine analog telephone — not a look-alike. Any real corded or cordless phone plugs right in.</div>
+        <div class="compare-cell alt">A simulacrum: a 2020s design styled to look retro — not a genuine telephone, and not a real recreation of a historical one either.</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">Pick your format</div>
+        <div class="compare-cell">Wall phone, desk phone, rotary, push-button, keys on the base for smaller hands — whatever fits your kid and your kitchen.</div>
+        <div class="compare-cell alt">Ships in a handful of colors. One shape.</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">If it's ever outgrown</div>
+        <div class="compare-cell">Standard, off-the-shelf hardware inside. Still real, useful, resellable gear — not e-waste.</div>
+        <div class="compare-cell alt">A single-purpose device built around one company's network. Its usefulness ends when the service does.</div>
+      </div>
+    </div>
+    <p class="compare-footnote">Based on Tin Can's own published pricing and FAQ at tincan.kids, checked 2026-08-08.</p>
+  </div>
+</section>
+
+<section id="pricing" class="band">
+  <div class="wrap">
+    <h2>Straightforward pricing</h2>
     <p class="sub">One box, one price. Bring your own phone.</p>
     <div class="pricing-card">
       <div class="price"><sup>$</sup>119</div>
@@ -193,7 +245,7 @@
         <li>Encrypted, closed network — only approved friends can call in</li>
         <li>Parent-managed contacts and quiet hours</li>
       </ul>
-      <a class="btn" href="https://portal.switchboard.kids/order/new">Buy a Jack</a>
+      <a class="btn" href="https://portal.switchboard.kids/signup">Buy a Jack</a>
       <div><span class="founding-badge">PS 11 families: free first year of service</span></div>
     </div>
   </div>
